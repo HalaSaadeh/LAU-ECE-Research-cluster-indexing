@@ -4,6 +4,9 @@ from nltk.stem import PorterStemmer
 from nltk.stem.snowball import SnowballStemmer 
 from nltk.tokenize import word_tokenize
 import re
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 
 # constants
 LANGUAGE = "english"
@@ -75,3 +78,22 @@ def stemming(text):
     return stemmedText
 
 
+def textToDataFrame(content):
+    """
+    Converts text to a data-frame of tf-idf vectors
+
+    Args:
+        - content: input text
+    Returns:
+        - df1: dataframe of tf-idf vectors
+        - list_FeatureKeys: feature names of the tf-idf vectors
+    """
+    vectorizer = TfidfVectorizer(ngram_range=(1, 1))
+    vectors = vectorizer.fit_transform(content[0:len(content)])
+    list_FeatureKeys = vectorizer.get_feature_names_out()
+    dense = vectors.todense()
+    denselist = dense.tolist()
+    df1 = pd.DataFrame(denselist, columns=list_FeatureKeys)
+    print(df1)
+    print(list_FeatureKeys)
+    return df1, list_FeatureKeys
