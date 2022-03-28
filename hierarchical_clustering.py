@@ -1,6 +1,6 @@
 from sklearn.cluster import AgglomerativeClustering
-from dendrogram_utils import get_basic_components, plot_dendrogram
-
+from dendrogram_utils import get_basic_components, plot_dendrogram, dendrogramDS
+import itertools
 
 def agglomorativeClustering(df, list_FeatureKeys):
     """
@@ -15,10 +15,15 @@ def agglomorativeClustering(df, list_FeatureKeys):
     y_hc1 = hc1.fit(df)
 
     plot_dendrogram(model=y_hc1)
-    #
-    # components = get_basic_components(hc1, len(df))
-    # # centers = get_dend_centers(B)
-    #
-    # DS = dendrogramDS(df, components)
-    # print(DS)
-    # return (DS, list_FeatureKeys)
+
+    components = get_basic_components(hc1, len(df))
+    # centers = get_dend_centers(B)
+    print(components)
+    DS = dendrogramDS(df, components)
+    print(DS.rootNode)
+
+    ii = itertools.count(df.shape[0])
+    clusters = [{'node_id': next(ii), 'left': x[0], 'right': x[1]} for x in y_hc1.children_]
+
+    print(clusters)
+    return (DS, list_FeatureKeys)

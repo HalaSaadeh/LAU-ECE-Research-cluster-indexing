@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.cluster.hierarchy import dendrogram
 from matplotlib import pyplot as plt
+from operator import add
 
 
 def plot_dendrogram(model, **kwargs):
@@ -102,8 +103,8 @@ class Node:
 
     def __str__(self):
         # return "DeepNodes:" +  ','.join(str(v) for v in self.deepNodes)+"\nDistance:" + str(self.distance)+"\nFeatureVector:"+ str(list(self.featureVector))
-        return "DeepNodes:" + ','.join(str(v) for v in self.deepNodes)
-        # return "DeepNodes:" +  ','.join(str(v) for v in self.deepNodes) + "\tFeatureVector:"+ str(list(self.featureVector))
+        # return "DeepNodes:" + ','.join(str(v) for v in self.deepNodes)
+        return "DeepNodes:" +  ','.join(str(v) for v in self.deepNodes) + "\tFeatureVector:"+ str(list(self.featureVector))
 
 
 class dendrogramDS:
