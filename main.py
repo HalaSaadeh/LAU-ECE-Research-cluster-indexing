@@ -3,7 +3,7 @@ from text_utils import textToDataFrame
 from hierarchical_clustering import agglomorativeClustering
 from dendrogram_utils import createNodesList
 from dewey_indexing import dewey_indexing
-
+from sqlite_utils import insert_index_as_table
 
 # Extract dataset
 content = extractDataset("D:/Research/SDG Corpus/")
@@ -20,4 +20,6 @@ nodesList, rootNodeNumber = createNodesList(content_df, model)
 
 # Generate the indexes (Dewey numbering)
 doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
-print(doc_id_index)
+
+# Insert the indices to the SQL table
+insert_index_as_table("doc_table_index", doc_id_index)
