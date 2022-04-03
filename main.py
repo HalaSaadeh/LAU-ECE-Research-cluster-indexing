@@ -2,6 +2,8 @@ from file_utils import extractDataset
 from text_utils import textToDataFrame
 from hierarchical_clustering import agglomorativeClustering
 from dendrogram_utils import createNodesList
+from dewey_indexing import dewey_indexing
+
 
 # Extract dataset
 content = extractDataset("D:/Research/SDG Corpus/")
@@ -15,3 +17,7 @@ model, list_FeatureKeys = agglomorativeClustering(content_df, content_featurekey
 
 # Get list of cluster nodes
 nodesList, rootNodeNumber = createNodesList(content_df, model)
+
+# Generate the indexes (Dewey numbering)
+doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
+print(doc_id_index)
