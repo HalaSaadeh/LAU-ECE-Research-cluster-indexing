@@ -7,7 +7,7 @@ def insert_index_as_table(indexName, index):
     cursor = sqliteConnection.cursor()
 
     # Convert dict to list of tuples
-    index_tuple_list = [(k, v) for k, v in index.items()]
+    index_tuple_list = [(k, str(v)) for k, v in index.items()]
 
     # Insert into database
     Delete_all_rows = """delete from """ + indexName
