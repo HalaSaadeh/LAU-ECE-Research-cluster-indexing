@@ -15,5 +15,5 @@ def agglomorativeClustering(df, list_FeatureKeys):
     model = hc1.fit(df)
 
     plot_dendrogram(model=model)
-
+    print(model.labels_)
     return model, list_FeatureKeys

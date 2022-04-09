@@ -14,7 +14,7 @@ content_df, content_featurekeys = textToDataFrame(content)
 
 # Compute clustering
 model, list_FeatureKeys = agglomorativeClustering(content_df, content_featurekeys)
-
+print(list_FeatureKeys)
 # Get list of cluster nodes
 nodesList, rootNodeNumber = createNodesList(content_df, model)
 
