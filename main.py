@@ -22,12 +22,12 @@ nodesList, rootNodeNumber = createNodesList(content_df, model)
 # Get top K keywords from each cluster and add the information to the nodesList
 new_df = getClusterVectors(df=content_df, nodeList = nodesList, nodeListRootNumber= rootNodeNumber)
 topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
-print(topKkeys)
 nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
 print(nodeList_withTopics)
 #
 # # Generate the indexes (Dewey numbering)
-# doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
-#
-# # Insert the indices to the SQL table
-# insert_index_as_table("doc_table_index", doc_id_index)
+doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
+print(cluster_topic_index)
+# Insert the indices to the SQL table
+insert_index_as_table("doc_table_index", doc_id_index)
+insert_index_as_table("cluster_topic_index", cluster_topic_index)

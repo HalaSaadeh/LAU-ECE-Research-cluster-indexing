@@ -57,5 +57,4 @@ def appendKeywordListToNodeList(nodeList, topics_df):
     """
     for index in list(topics_df.index):
         nodeList[index]["topic"] = list(topics_df.iloc[index])
-
     return nodeList

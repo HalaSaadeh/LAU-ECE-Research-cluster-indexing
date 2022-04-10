@@ -15,7 +15,7 @@ def dewey_indexing(nodesList, rootNodeNumber, root_id="0", doc_id_index = {}, cl
     if current_node["left"] is not None and current_node["right"] is not None:
         children = [current_node["left"], current_node["right"]]
 
-    # cluster_topic_index[root_id] = dendrogram_root.topic
+    cluster_topic_index[root_id] = current_node["topic"]
 
     if not len(children) == 0:
         higher_child_id = root_id + ".0"
