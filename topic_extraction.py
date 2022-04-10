@@ -45,3 +45,17 @@ def getTopKKeywordsForEachCluster(df, k):
     result = result.reset_index(drop=True)
     return result
 
+
+def appendKeywordListToNodeList(nodeList, topics_df):
+    """
+    Extracts top K keywords for each cluster in df.
+    Args:
+        - df: input data frame of TF-IDF vectors for all input documents and clusters
+        - k: number of keywords to extract
+    Returns:
+        - nodeList: new nodeList containing keywords for each cluster/document
+    """
+    for index in list(topics_df.index):
+        nodeList[index]["topic"] = list(topics_df.iloc[index])
+
+    return nodeList

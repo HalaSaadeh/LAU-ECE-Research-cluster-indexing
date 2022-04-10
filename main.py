@@ -4,7 +4,7 @@ from hierarchical_clustering import agglomorativeClustering
 from dendrogram_utils import createNodesList
 from dewey_indexing import dewey_indexing
 from sqlite_utils import insert_index_as_table
-from topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster
+from topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster, appendKeywordListToNodeList
 
 # Extract dataset
 content = extractDataset("D:/Research/SDG Corpus/")
@@ -22,8 +22,9 @@ nodesList, rootNodeNumber = createNodesList(content_df, model)
 # Get top K keywords from each cluster and add the information to the nodesList
 new_df = getClusterVectors(df=content_df, nodeList = nodesList, nodeListRootNumber= rootNodeNumber)
 topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
-
-
+print(topKkeys)
+nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
+print(nodeList_withTopics)
 #
 # # Generate the indexes (Dewey numbering)
 # doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
