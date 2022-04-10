@@ -1,5 +1,6 @@
 from operator import add
-
+import pandas as pd
+import numpy as np
 
 def GetVectorOfEachCluster(ClusterNb, y_hc, df):
     Clustertemp1 = [[] for i in range(0, ClusterNb)]
@@ -52,3 +53,23 @@ def getClusterVectors(df, nodeList, nodeListRootNumber):
     new_df_row.name = nodeListRootNumber
     df = df.append([new_df_row])
     return df
+
+
+def getTopKKeywordsForEachCluster(df, k):
+    """
+    Extracts top K keywords for each cluster in df.
+    Args:
+        - df: input data frame of TF-IDF vectors for all input documents and clusters
+        - k: number of keywords to extract
+    Returns:
+        - result: data frame with top K keywords for each document / cluster
+    """
+    column_names = range(1,k+1)
+    result = pd.DataFrame(np.zeros((0, k)), columns=column_names)
+    df_transposed = df.T
+    for i in df_transposed.columns:
+        df1row = pd.DataFrame(df_transposed.nlargest(k, i).index.tolist(), index=column_names).T
+        result = pd.concat([result, df1row], axis=0)
+    result = result.reset_index(drop=True)
+    return result
+
