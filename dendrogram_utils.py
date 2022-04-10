@@ -54,7 +54,7 @@ def createNodesList(df, model):
             - model: model after fitting during clustering
         Returns:
             - nodeDict: dictionary of nodes and their children
-        """
+    """
     # Create list of leaf/document nodes
     numberOfDocuments = df.shape[0]
     documentNodes = []
