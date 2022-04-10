@@ -5,6 +5,8 @@ from dendrogram_utils import createNodesList
 from dewey_indexing import dewey_indexing
 from sqlite_utils import insert_index_as_table
 from topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster, appendKeywordListToNodeList
+from laf_indexing import laf_indexing
+
 
 # Extract dataset
 content = extractDataset("D:/Research/SDG Corpus/")
@@ -15,19 +17,20 @@ content_df, content_featurekeys = textToDataFrame(content)
 
 # Compute clustering
 model, list_FeatureKeys = agglomorativeClustering(content_df, content_featurekeys)
-print(list_FeatureKeys)
+
 # Get list of cluster nodes
 nodesList, rootNodeNumber = createNodesList(content_df, model)
 
-# Get top K keywords from each cluster and add the information to the nodesList
-new_df = getClusterVectors(df=content_df, nodeList = nodesList, nodeListRootNumber= rootNodeNumber)
-topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
-nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
-print(nodeList_withTopics)
+# # Get top K keywords from each cluster and add the information to the nodesList
+# new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber= rootNodeNumber)
+# topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
+# nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
 #
 # # Generate the indexes (Dewey numbering)
-doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
-print(cluster_topic_index)
-# Insert the indices to the SQL table
-insert_index_as_table("doc_table_index", doc_id_index)
-insert_index_as_table("cluster_topic_index", cluster_topic_index)
+# doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
+#
+# # Insert the indices to the SQL table
+# insert_index_as_table("doc_table_index", doc_id_index)
+# insert_index_as_table("cluster_topic_index", cluster_topic_index)
+
+laf_indexing(nodesList, rootNodeNumber)
