@@ -1,9 +1,9 @@
 import sqlite3
 
 
-def insert_index_as_table(indexName, index):
+def insert_index_as_table(dbPath, indexName, index):
     # Connect to database
-    sqliteConnection = sqlite3.connect('D:/Research/Implementation/undergrad-research-indexing/dewey_db.db')
+    sqliteConnection = sqlite3.connect(dbPath)
     cursor = sqliteConnection.cursor()
 
     # Convert dict to list of tuples
@@ -19,4 +19,3 @@ def insert_index_as_table(indexName, index):
     sqliteConnection.commit()
     cursor.close()
     sqliteConnection.close()
-

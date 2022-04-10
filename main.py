@@ -5,12 +5,11 @@ from dendrogram_utils import createNodesList
 from dewey_indexing import dewey_indexing
 from sqlite_utils import insert_index_as_table
 from topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster, appendKeywordListToNodeList
-from laf_indexing import laf_indexing
-
+from laf_indexing import laf_indexing, getLevelOrderNumbers
 
 # Extract dataset
-content = extractDataset("D:/Research/SDG Corpus/")
-# content = extractDataset("D:/Research/Resolutions Corpus/Res/EcoSoc/Eng 2020/")
+# content = extractDataset("D:/Research/SDG Corpus/")
+content = extractDataset("D:/Research/Resolutions Corpus/Res/EcoSoc/Eng 2020/")
 
 # Convert text to tf-idf vectors
 content_df, content_featurekeys = textToDataFrame(content)
@@ -21,16 +20,23 @@ model, list_FeatureKeys = agglomorativeClustering(content_df, content_featurekey
 # Get list of cluster nodes
 nodesList, rootNodeNumber = createNodesList(content_df, model)
 
-# # Get top K keywords from each cluster and add the information to the nodesList
-# new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber= rootNodeNumber)
-# topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
-# nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
-#
-# # Generate the indexes (Dewey numbering)
-# doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
-#
-# # Insert the indices to the SQL table
-# insert_index_as_table("doc_table_index", doc_id_index)
-# insert_index_as_table("cluster_topic_index", cluster_topic_index)
+# Get top K keywords from each cluster and add the information to the nodesList
+new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber= rootNodeNumber)
+topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
+nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
 
-laf_indexing(nodesList, rootNodeNumber)
+# Generate the indexes (Dewey numbering)
+doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
+
+# Insert the indices to the SQL table
+DEWEY_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/dewey_db.db"
+insert_index_as_table(DEWEY_DB_PATH, "doc_table_index", doc_id_index)
+insert_index_as_table(DEWEY_DB_PATH, "cluster_topic_index", cluster_topic_index)
+
+# Generate the indexes (LAF numbering)
+levelOrderNumbersDict = getLevelOrderNumbers(nodesList, rootNodeNumber)
+doc_id_index, cluster_topic_index, laf_index = laf_indexing(nodesList, rootNodeNumber, levelOrderNumbersDict)
+LAF_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/laf_db.db"
+insert_index_as_table(LAF_DB_PATH, "doc_table_index", doc_id_index)
+insert_index_as_table(LAF_DB_PATH, "cluster_topic_index", cluster_topic_index)
+insert_index_as_table(LAF_DB_PATH, "laf_index", laf_index)

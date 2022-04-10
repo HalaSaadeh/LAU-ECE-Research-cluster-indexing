@@ -4,11 +4,6 @@ from dendrogram_utils import createNodesList
 def dewey_indexing(nodesList, rootNodeNumber, root_id="0", doc_id_index = {}, cluster_topic_index={}):
     """
     Generates the cluster index (dewey numbering)
-    Args:
-        - df: input dataframe of tf-idf vectors
-        - model: clustering output
-    Returns:
-        - cluster index table
     """
     current_node = nodesList[rootNodeNumber]
     children = []
@@ -21,14 +16,8 @@ def dewey_indexing(nodesList, rootNodeNumber, root_id="0", doc_id_index = {}, cl
         higher_child_id = root_id + ".0"
         lower_child_id = root_id + ".1"
 
-        # if children[0].distance > children[1].distance:
-        #     higher_child = children[0]
-        #     lower_child=children[1]
-        # else:
-        #     higher_child = children[1]
-        #     lower_child = children[0]
-        higher_child = children[1]  # right child
-        lower_child = children[0]  # left child
+        higher_child = children[0]  # right child
+        lower_child = children[1]  # left child
 
         dewey_indexing(nodesList, higher_child, higher_child_id, doc_id_index, cluster_topic_index)
         dewey_indexing(nodesList, lower_child, lower_child_id, doc_id_index, cluster_topic_index)
