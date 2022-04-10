@@ -22,7 +22,7 @@ def pre_indexing(datasetPath):
     nodesList, rootNodeNumber = createNodesList(content_df, model)
 
     # Get top K keywords from each cluster and add the information to the nodesList
-    new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber= rootNodeNumber)
+    new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber=rootNodeNumber)
     topKkeys = getTopKKeywordsForEachCluster(new_df, 6)
     nodeList_withTopics = appendKeywordListToNodeList(nodesList, topKkeys)
     return nodesList, rootNodeNumber
@@ -37,6 +37,8 @@ def indexing_dewey(nodesList, rootNodeNumber):
     insert_index_as_table(DEWEY_DB_PATH, "doc_table_index", doc_id_index)
     insert_index_as_table(DEWEY_DB_PATH, "cluster_topic_index", cluster_topic_index)
 
+    return doc_id_index, cluster_topic_index
+
 
 def indexing_laf(nodesList, rootNodeNumber):
     # Generate the indexes (LAF numbering)
@@ -48,3 +50,5 @@ def indexing_laf(nodesList, rootNodeNumber):
     insert_index_as_table(LAF_DB_PATH, "doc_table_index", doc_id_index)
     insert_index_as_table(LAF_DB_PATH, "cluster_topic_index", cluster_topic_index)
     insert_index_as_table(LAF_DB_PATH, "laf_index", laf_index)
+
+    return doc_id_index, cluster_topic_index, laf_index
