@@ -17,7 +17,7 @@ datasets = [
     ("SDG Corpus", "D:/Research/SDG Corpus/", 15),
     ("Resolutions Ecosoc Eng 2020", "D:/Research/Resolutions Corpus/Res/EcoSoc/Eng 2020/", 32),
     ("Resolutions Escwa Since 2006", "D:/Research/Resolutions Corpus/Res/ESCWA Res (since 2006)", 69),
-
+    ("SDG Full Dataset", "D:/Research/SDG FullDataset/FullDataset", 160)
 ]
 
 for dataset in datasets:
@@ -26,6 +26,7 @@ for dataset in datasets:
 
     start = timeit.default_timer()
     doc_id_index, cluster_topic_index = indexing_dewey(nodesList, rootNumber)
+    print(doc_id_index)
     stop = timeit.default_timer()
     dewey_build_time = stop - start
     total_index_size_dewey = (asizeof.asizeof(doc_id_index) + asizeof.asizeof(cluster_topic_index))/(1024*1024)
