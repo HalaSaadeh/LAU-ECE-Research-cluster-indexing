@@ -47,6 +47,5 @@ def extractDataset(datasetPath):
             filteredText = stopword_removal(extractFromFile(file))
             stems = stemming(filteredText)
             content.append(convert(stems))
-
-    return content
+    return filenames, content
 

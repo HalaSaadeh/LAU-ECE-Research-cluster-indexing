@@ -86,6 +86,6 @@ def laf_indexing(nodesList, rootNodeNumber, levelOrderNumbersDict, level_order_n
                      father_number=level_order_number, level_number=level_number + 1, doc_id_index=doc_id_index,
                      cluster_topic_index=cluster_topic_index, laf_index=laf_index)
     else:
-        doc_id_index[root_id] = rootNodeNumber
+        doc_id_index[root_id] = nodesList[rootNodeNumber]["doc"]
 
     return doc_id_index, cluster_topic_index, laf_index

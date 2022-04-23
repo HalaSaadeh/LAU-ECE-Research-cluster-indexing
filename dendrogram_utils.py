@@ -46,7 +46,7 @@ class Node:
                str(self.rightNode)
 
 
-def createNodesList(df, model):
+def createNodesList(df, model, filenames):
     """
         Returns list of nodes with their corresponding left and right child
         Args:
@@ -59,7 +59,7 @@ def createNodesList(df, model):
     numberOfDocuments = df.shape[0]
     documentNodes = []
     for i in range(numberOfDocuments):
-        node = {i:{"left":None, "right":None}}
+        node = {i: {"left":None, "right": None, "doc": filenames[i]}}
         documentNodes.append(node)
 
     # Create list of cluster nodes
@@ -77,7 +77,7 @@ def createNodesList(df, model):
 
     # Get rootNodeNumber
     rootNodeNumber = getRootNodeNumberFromNodeList(nodeDict)
-
+    print(nodeDict)
     return nodeDict, rootNodeNumber
 
 

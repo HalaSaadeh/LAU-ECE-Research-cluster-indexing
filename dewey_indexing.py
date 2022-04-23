@@ -22,6 +22,6 @@ def dewey_indexing(nodesList, rootNodeNumber, root_id="0", doc_id_index = {}, cl
         dewey_indexing(nodesList, higher_child, higher_child_id, doc_id_index, cluster_topic_index)
         dewey_indexing(nodesList, lower_child, lower_child_id, doc_id_index, cluster_topic_index)
     else:
-        doc_id_index[root_id]=rootNodeNumber
+        doc_id_index[root_id]=nodesList[rootNodeNumber]["doc"]
 
     return doc_id_index, cluster_topic_index

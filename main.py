@@ -10,7 +10,7 @@ from laf_indexing import laf_indexing, getLevelOrderNumbers
 
 def pre_indexing(datasetPath):
     # Extract dataset
-    content = extractDataset(datasetPath)
+    filenames, content = extractDataset(datasetPath)
 
     # Convert text to tf-idf vectors
     content_df, content_featurekeys = textToDataFrame(content)
@@ -19,7 +19,7 @@ def pre_indexing(datasetPath):
     model, list_FeatureKeys = agglomorativeClustering(content_df, content_featurekeys)
 
     # Get list of cluster nodes
-    nodesList, rootNodeNumber = createNodesList(content_df, model)
+    nodesList, rootNodeNumber = createNodesList(content_df, model, filenames)
 
     # Get top K keywords from each cluster and add the information to the nodesList
     new_df = getClusterVectors(df=content_df, nodeList=nodesList, nodeListRootNumber=rootNodeNumber)
