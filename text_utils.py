@@ -94,6 +94,4 @@ def textToDataFrame(content):
     dense = vectors.todense()
     denselist = dense.tolist()
     df1 = pd.DataFrame(denselist, columns=list_FeatureKeys)
-    print(df1)
-    print(list_FeatureKeys)
     return df1, list_FeatureKeys

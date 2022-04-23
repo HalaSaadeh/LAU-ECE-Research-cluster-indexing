@@ -11,9 +11,9 @@ def agglomorativeClustering(df, list_FeatureKeys):
     Returns:
         - dendrogram hierarchy
     """
+    print(df)
     hc1 = AgglomerativeClustering(distance_threshold=0, n_clusters=None, affinity='cosine', linkage='average')
     model = hc1.fit(df)
 
     plot_dendrogram(model=model)
-    print("Number clusters: ", model.n_clusters)
     return model, list_FeatureKeys

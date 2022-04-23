@@ -74,7 +74,6 @@ def createNodesList(df, model):
     nodeDict = {}
     for node in nodeList:
         nodeDict.update(node)
-    print(nodeDict)
 
     # Get rootNodeNumber
     rootNodeNumber = getRootNodeNumberFromNodeList(nodeDict)
@@ -92,5 +91,4 @@ def getRootNodeNumberFromNodeList(nodeList: dict):
     """
     nodeIds = nodeList.keys()
     rootNodeNumber = max(nodeIds)
-    print(rootNodeNumber)
     return rootNodeNumber

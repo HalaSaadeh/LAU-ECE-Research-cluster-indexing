@@ -24,7 +24,6 @@ def extractFromFile(file):
         for page in pdf:
             content += page  # .encode('utf-8')
 
-    print('File extracted!')
     return content
 
 
@@ -51,6 +50,3 @@ def extractDataset(datasetPath):
 
     return content
 
-
-# print(extractFromFile("D:/Research/SDG Corpus/goal_1.pdf"))
-# extractDataset("D:/Research/SDG Corpus/")
