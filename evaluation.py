@@ -15,9 +15,14 @@ writer.writerow(csv_header)
 datasets = [
     # ("Resolutions Ecosoc Eng 2021", "D:\Research\Resolutions Corpus\Res\EcoSoc\Eng 2021", 5),
     ("SDG Corpus", "D:/Research/SDG Corpus/", 15),
-    # ("Resolutions Ecosoc Eng 2020", "D:/Research/Resolutions Corpus/Res/EcoSoc/Eng 2020/", 32),
-    # ("Resolutions Escwa Since 2006", "D:/Research/Resolutions Corpus/Res/ESCWA Res (since 2006)", 69),
-    # ("SDG Full Dataset", "D:/Research/SDG FullDataset/FullDataset", 160)
+    # ("SDG Corpus Dup", "D:/Research/SDG Corpus Dup/", 30),
+    # ("Resolutions Ecosoc Eng 2020", "D:/Research/Resolutions Corpus/Res/EcoSoc/Eng 2020 Mod/", 45),
+    # ("Resolutions Escwa Since 2006", "D:/Research/Resolutions Corpus/Res/ESCWA Res (since 2006) Mod", 60),
+    # ("SDG Full Dataset", "D:/Research/SDG FullDataset - Copy/FullDataset", 120),
+    # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod/FullDataset", 180),
+    # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod - Copy/FullDataset", 240),
+    # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod - Copy - Copy/FullDataset", 300)
+
 ]
 
 for dataset in datasets:
