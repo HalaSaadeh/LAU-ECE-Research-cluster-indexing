@@ -5,7 +5,7 @@ from main import pre_indexing, indexing_dewey, indexing_laf
 
 datasets = [
     # ("Resolutions Ecosoc Eng 2021", "D:\Research\Resolutions Corpus\Res\EcoSoc\Eng 2021", 5),
-    ("SDG Corpus", "D:/Research/SDG Corpus/", 15),
+    # ("SDG Corpus", "D:/Research/SDG Corpus 10/", 10),
     # ("SDG Corpus", "D:/Research/SDG 15", 15),
     # ("SDG Corpus Dup", "D:/Research/SDG 30", 30),
     # ("SDG Full Dataset", "D:/Research/SDG 45",  45),
@@ -14,6 +14,16 @@ datasets = [
     # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod/FullDataset", 180),
     # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod - Copy/FullDataset", 240),
     # ("SDG Full Dataset", "D:/Research/SDG FullDataset Mod - Copy - Copy/FullDataset", 300)
+    # ("SDG Full Dataset", "D:/Research/SDG/100", 100),
+    # ("SDG Full Dataset", "D:/Research/SDG/200", 200),
+    # ("SDG Full Dataset", "D:/Research/SDG/300", 300),
+    # ("SDG Full Dataset", "D:/Research/SDG/400", 400),
+    # ("SDG Full Dataset", "D:/Research/SDG/500", 500),
+    # ("SDG Full Dataset", "D:/Research/SDG/600", 600),
+    # ("SDG Full Dataset", "D:/Research/SDG/700", 700),
+    # ("SDG Full Dataset", "D:/Research/SDG/800", 800),
+    # ("SDG Full Dataset", "D:/Research/SDG/900", 900),
+    ("SDG Full Dataset", "D:/Research/SDG/1000", 1000),
 
 ]
 
