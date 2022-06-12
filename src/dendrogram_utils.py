@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.cluster.hierarchy import dendrogram
 from matplotlib import pyplot as plt
-import dendrogram_utils as du
 import itertools
 
 
@@ -9,9 +8,7 @@ def plot_dendrogram(model, **kwargs):
     """
     Plots the dendrogram. Code snippet is taken from scikit-learn.org
     """
-    # Create linkage matrix and then plot the dendrogram
-
-    # create the counts of samples under each node
+    # Create the counts of samples under each node
     counts = np.zeros(model.children_.shape[0])
     n_samples = len(model.labels_)
     for i, merge in enumerate(model.children_):

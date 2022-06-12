@@ -1,5 +1,5 @@
 from sklearn.cluster import AgglomerativeClustering
-from dendrogram_utils import plot_dendrogram
+from src.dendrogram_utils import plot_dendrogram
 
 
 def agglomorativeClustering(df, list_FeatureKeys):

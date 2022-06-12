@@ -1,6 +1,3 @@
-from dendrogram_utils import createNodesList
-
-
 def dewey_indexing(nodesList, rootNodeNumber, root_id="0", doc_id_index = {}, cluster_topic_index={}):
     """
     Generates the cluster index (dewey numbering)
