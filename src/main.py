@@ -2,14 +2,13 @@ import timeit
 
 from pympler import asizeof
 
-from file_utils import extractDataset
-from text_utils import textToDataFrame
-from hierarchical_clustering import agglomorativeClustering
-from dendrogram_utils import createNodesList
-from dewey_indexing import dewey_indexing
-from sqlite_utils import insert_index_as_table
-from topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster, appendKeywordListToNodeList
-from laf_indexing import laf_indexing, getLevelOrderNumbers
+from src.file_utils import extractDataset
+from src.text_utils import textToDataFrame
+from src.hierarchical_clustering import agglomorativeClustering
+from src.dendrogram_utils import createNodesList
+from src.dewey_indexing import dewey_indexing
+from src.sqlite_utils import insert_index_as_table
+from src.topic_extraction import getClusterVectors, getTopKKeywordsForEachCluster, appendKeywordListToNodeList
 import csv
 
 f = open('D:/Research/Implementation/undergrad-research-indexing/results.csv', 'w')
@@ -63,7 +62,7 @@ def indexing_dewey(dataset):
     doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
 
     # Insert the indices to the SQL table
-    DEWEY_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/dewey_db.db"
+    DEWEY_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/src/dewey_db.db"
     insert_index_as_table(DEWEY_DB_PATH, "doc_table_index", doc_id_index)
     insert_index_as_table(DEWEY_DB_PATH, "cluster_topic_index", cluster_topic_index)
     stop = timeit.default_timer()
@@ -77,17 +76,3 @@ def indexing_dewey(dataset):
     writer.writerow(csv_row)
 
     return doc_id_index, cluster_topic_index
-
-
-def indexing_laf(nodesList, rootNodeNumber):
-    # Generate the indexes (LAF numbering)
-    levelOrderNumbersDict = getLevelOrderNumbers(nodesList, rootNodeNumber)
-    doc_id_index, cluster_topic_index, laf_index = laf_indexing(nodesList, rootNodeNumber, levelOrderNumbersDict)
-
-    # Insert the indices to the SQL table
-    LAF_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/laf_db.db"
-    insert_index_as_table(LAF_DB_PATH, "doc_table_index", doc_id_index)
-    insert_index_as_table(LAF_DB_PATH, "cluster_topic_index", cluster_topic_index)
-    insert_index_as_table(LAF_DB_PATH, "laf_index", laf_index)
-
-    return doc_id_index, cluster_topic_index, laf_index

@@ -2,7 +2,7 @@ import glob
 
 import pdftotext
 import os
-from text_utils import stopword_removal, stemming
+from src.text_utils import stopword_removal, stemming
 
 
 def convert(lst):
