@@ -9,6 +9,7 @@ def insert_index_as_table(dbPath, indexName, index):
     # Convert dict to list of tuples
     index_tuple_list = [(k, str(v)) for k, v in index.items()]
 
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ''' + indexName + ''' (id TEXT, topic TEXT)''')
     # Insert into database
     Delete_all_rows = """delete from """ + indexName
     cursor.execute(Delete_all_rows)

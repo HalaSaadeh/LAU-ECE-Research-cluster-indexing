@@ -54,15 +54,15 @@ def pre_indexing(datasetPath):
     return nodesList, rootNodeNumber, results
 
 
-def indexing_dewey(dataset):
+def indexing_dewey(dataset, i):
     nodesList, rootNodeNumber, results = pre_indexing(dataset)
 
     start = timeit.default_timer()
     # Generate the indexes (Dewey numbering)
-    doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber)
+    doc_id_index, cluster_topic_index = dewey_indexing(nodesList, rootNodeNumber, "0", {}, {})
 
     # Insert the indices to the SQL table
-    DEWEY_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/src/dewey_db.db"
+    DEWEY_DB_PATH = "D:/Research/Implementation/undergrad-research-indexing/src/dewey_db" + str(i) + ".db"
     insert_index_as_table(DEWEY_DB_PATH, "doc_table_index", doc_id_index)
     insert_index_as_table(DEWEY_DB_PATH, "cluster_topic_index", cluster_topic_index)
     stop = timeit.default_timer()
